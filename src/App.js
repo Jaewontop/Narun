@@ -62,7 +62,7 @@ function App() {
                 :<Link className="toggleBarLink" to='/login'>로그인</Link>}
             </div>
             <Link to='/'><div className="service_title">{currentPage}</div></Link>
-            <Link className="writePostButton" to='/emotion1/post1'><img className="writePost"src={image}></img></Link>
+            <Link className="writePostButton" to='/createpost'><img className="writePost"src={image}></img></Link>
         </div>
       </nav>
       <Routes>
@@ -78,12 +78,6 @@ function App() {
         <Route path='/emotion3' element={<Emotion3 setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion4' element={<Emotion4 setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion5' element={<Emotion5 setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
-  
-        <Route path='/emotion1/post1' element={<CreatePost setOpen={setOpen} setCurrentPage={setCurrentPage} isAuth={isAuth} posts={"post1"}/>}></Route>
-        <Route path='/emotion2/post2' element={<CreatePost setOpen={setOpen} isAuth={isAuth} posts={"post2"}/>}></Route>
-        <Route path='/emotion3/post3' element={<CreatePost setOpen={setOpen} isAuth={isAuth} posts={"post3"}/>}></Route>
-        <Route path='/emotion4/post4' element={<CreatePost setOpen={setOpen} isAuth={isAuth} posts={"post4"}/>}></Route>
-        <Route path='/emotion5/post5' element={<CreatePost setOpen={setOpen} isAuth={isAuth} posts={"post5"}/>}></Route>
       </Routes>
     </Router>
   );

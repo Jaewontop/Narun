@@ -13,30 +13,7 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
         
         <div className="EmotionsBox">
             <div className="Emotions">
-                <Link to='/emotion1' className="emotionBox">
-                    <div className="emotionImage"></div>
-                    <div className="emotionName">기쁨</div>
-                </Link>
-                <Link to='/emotion2' className="emotionBox">
-                    <div className="emotionImage"></div>
-                    <div className="emotionName">분노</div>
-                </Link>
-                <Link to='/emotion3' className="emotionBox">
-                    <div className="emotionImage"></div>
-                    <div className="emotionName">슬픔</div>
-                </Link>
-                <Link to='/emotion4' className="emotionBox">
-                    <div className="emotionImage"></div>
-                    <div className="emotionName">걱정</div>
-                </Link>
-                <Link to='/emotion5' className="emotionBox">
-                    <div className="emotionImage"></div>
-                    <div className="emotionName">사랑</div>
-                </Link>
-                <Link to='/emotion6' className="emotionBox">
-                    <div className="emotionImage"></div>
-                    <div className="emotionName">증오(욕심)</div>
-                </Link>
+                
             </div>
         </div>
     )
