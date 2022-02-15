@@ -133,7 +133,7 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
             <div className="postTextContainer"> {post.postText} </div>
             <div className="likeAndComment">
               <button className="likeButton" id={post.id} onClick={()=>{if(post.author.id===auth.currentUser.uid){alert("본인 게사물에는 좋아요를 누를 수 없습니다")} else{addLike(post.id);}  }}><img src={heart}/><h2 id="wholikeTxt"className="caption100"> 님 외 여러 명이 좋아합니다.</h2></button>
-              <div className="commentCount"><img src={messenger}/><h2 id="commentCountTxt"className="caption100">{post.commentCount}{auth.currentUser.displayName}</h2></div>
+              <div className="commentCount"><img src={messenger}/><h2 id="commentCountTxt"className="caption100">{post.commentCount}{}</h2></div>
             </div>
             {(post.commentCount<=1)?
                <>

@@ -394,15 +394,35 @@ textarea:focus{
 .EmotionsBox{
   width:100vw;
   display:flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #161C2D;
+  margin-top:100px;
 }
 .Emotions{
-  margin-top: 5vw;
-  width:85vw;
-  display:grid;
-  grid-template-columns: 40vw 40vw;
-  row-gap: 5vw;
-  column-gap: 5vw;
+  display:flex;
+  flex-direction: column;
+  height:100vh;
+  justify-content: space-between;
+  
+}
+.pfpImage{
+  width:76px;
+  height:76px;
+  border-radius: 16px;
+  margin-left: 12px;
+}
+.happy_emotions{
+  display:flex;
+  background-color:#1F2537;
+  border-radius: 16px;
+  width: 342px;
+  height: 100px;
+  align-items: center;
+}
+#canvas{
+  display:none;
+  border:1px solid;
 }
 .emotionBox{
   height:40vw;
