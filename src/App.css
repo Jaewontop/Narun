@@ -79,6 +79,7 @@ a {
 }
 .diaryTitleInput{
   background-color: #161C2D;
+  color:#A6A6AF;
   width: 294px;
   height: 30px;
   border-radius: 16px;
@@ -424,6 +425,23 @@ textarea:focus{
   display:none;
   border:1px solid;
 }
+#canvas2{
+  display:none;
+  border:1px solid;
+}
+#canvas3{
+  display:none;
+  border:1px solid;
+}
+#canvas4{
+  display:none;
+  border:1px solid;
+}
+#canvas5{
+  display:none;
+  border:1px solid;
+}
+
 .emotionBox{
   height:40vw;
   background-color: #D9F0FF;
@@ -455,8 +473,8 @@ textarea:focus{
 .headerTab{
   display:flex;
   width:95%;
-  /* white-space: nowrap; */
-  /* overflow-x:scroll; */
+  white-space: nowrap; 
+  overflow-x:scroll;
   /* justify-content: space-between; */
   padding:0;
   margin:0;

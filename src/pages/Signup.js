@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import {auth,provider} from '../firebase-config';
-import {updateProfile,createUserWithEmailAndPassword,signInWithCredential,signInWithPopup} from "firebase/auth";
+import {updateProfile,createUserWithEmailAndPassword,onAuthStateChanged,signInWithCredential,signInWithPopup} from "firebase/auth";
 import {useNavigate} from 'react-router-dom';
 
 const SignUp = ({setOpen, setCurrentPage,setIsAuth}) => {
@@ -17,28 +17,30 @@ const SignUp = ({setOpen, setCurrentPage,setIsAuth}) => {
         signInWithPopup(auth, provider).then((result) => {
             localStorage.setItem("isAuth",true);//?? 뭐지 이건
             setIsAuth(true);
-            navigate("/");
+            navigate("emotion1");
         })
     }
     const register = async () => {
-
         try {
           const user = await createUserWithEmailAndPassword(
             auth,
             registerEmail,
             registerPassword,
           );
-          updateProfile(auth.currentUser,{
-            displayName: registerNickname
-            }).then(function() {
-            console.log(registerNickname);
-            })
-          console.log(user);
+          onAuthStateChanged(auth,(currentUser)=>{
+            updateProfile(auth.currentUser,{
+                displayName: registerNickname
+                }).then(function() {
+                console.log(registerNickname);
+                }).catch((error)=>{console.log(error);})
+          });
+          
+        //   console.log(user);
         } catch (error) {
           console.log(error.message);
         }
         setIsAuth(true);
-        // window.location.href="/emotion1";
+        navigate("/emotion1");
     };
     useEffect(()=>{
         if(registerCheckPassword===registerPassword){

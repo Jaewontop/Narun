@@ -20,13 +20,13 @@ function CreatePost({setOpen, setCurrentPage,isAuth,posts}){
     const [postText,setPostText] = useState("");
     let navigate = useNavigate();
     const [emotionSelect,setEmotionSelect] = useState(1);
-    
-    const postsCollectionRef = collection(db, 'posts');
+    const postName = 'post'+String(emotionSelect);
+    console.log(postName);
+    const postsCollectionRef = collection(db, postName);
     const createPost = async () => {
-        await addDoc(postsCollectionRef, {title,postText,emotion:emotionSelect,comment:[],commentCount:0,author:{name:auth.currentUser.displayName,id:auth.currentUser.uid},likeCount:0,like:[]});
-        let url = '/emotion1';
-        window.location.href=url;
-        
+        await addDoc(postsCollectionRef, {title,postText,comment:[],commentCount:0,author:{name:auth.currentUser.displayName,id:auth.currentUser.uid},likeCount:0,like:[]});
+        await addDoc(collection(db,"posts"),{title,postText,comment:[],commentCount:0,author:{name:auth.currentUser.displayName,id:auth.currentUser.uid},likeCount:0,like:[]});
+        navigate('/emotiontotal');
     }
     useEffect(()=>{
         if(!isAuth){

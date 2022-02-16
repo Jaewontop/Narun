@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {storage} from '../firebase-config';
 import {ref} from '@firebase/storage';
 import { getDownloadURL} from "firebase/storage";
-import pfp from '../img/pfp.svg';
+import pfp from '../img/user_avatar-default.svg';
 import messenger from '../img/Union.svg';
 import heart from '../img/heart.svg';
 import CommentMore from './CommentMore';
@@ -17,18 +17,14 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
   const [commentToggle,setCommentToggle] =useState('asd');
 
 
-  // let profileImg = '';
-  // console.log(posts);
+
   const postsCollectionRef = collection(db, posts);
   // console.log("home");
   useEffect(()=>{
-    // setPersistence(auth,browserSessionPersistence ).then(()=>{console.log("success")});
-    // console.log("home1");
-    // console.log(comment);
-    // console.log(comment);
+
     onSnapshot(postsCollectionRef, (snapshot)=>
       setPostList(snapshot.docs.map((doc)=>({
-        ...doc.data(),firstComment:doc.data().comment[0],firstPeople:doc.data().commentPeople[0],id:doc.id
+        ...doc.data(),id:doc.id
       })))
     );
     // const q = query(collection(db,'posts'));
@@ -139,14 +135,14 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
                <>
                 <hr className="breakLine"/>
                 <div className="commentAndPeople">
-                  <h1 className="caption150">{post.firstPeople}</h1> <p className="postMainComment">{post.firstComment}</p>
+                  <h1 className="caption150">{post.commentPeople?post.commentPeople[0]:""}</h1> <p className="postMainComment">{post.comment?post.comment[0]:""}</p>
                 </div>
                </>
               :commentToggle!=post.id?(
               <div id="commentShow">
                 <hr className="breakLine"/>
                 <div className="commentAndPeople">
-                  <h1 className="caption150">{post.firstPeople}</h1> <p className="postMainComment">{post.firstComment}</p>
+                  <h1 className="caption150">{post.commentPeople?post.commentPeople[0]:""}</h1> <p className="postMainComment">{post.comment?post.comment[0]:""}</p>
                 </div>
                 <button onClick={()=>{commentToggles(post.id)}} className="commentMoreButton" id="commentMoreTxt"><h3 className="subhead100">댓글더보기 &gt;</h3></button>
               </div>)
@@ -159,7 +155,7 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
             </div>})}</div>)
             }
             <div className="inputAndButton">
-              <input onBlur={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="none";}} onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="block";}} id="commentAddInput"onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value)}}/>
+              <input onBlur={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="none";}} onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.value='';input.style.display="block";}} id="commentAddInput"onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value)}}/>
               <button id={post.id+'button'} style={commentButtonStyle} className="commentSendButton" onClick={()=>{addComment(post.id)}}>+</button> 
             </div>
           </div>

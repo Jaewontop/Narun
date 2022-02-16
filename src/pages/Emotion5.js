@@ -4,6 +4,7 @@ import {signOut} from "firebase/auth";
 import {auth} from "../firebase-config";
 import HomeTitle from './HomeTitle';
 import {useNavigate} from 'react-router-dom';
+import pfp0 from '../img/pfp-all.svg';
 import pfp1 from "../img/pfp-happy.svg";
 import pfp2 from "../img/pfp-mad.svg";
 import pfp3 from "../img/pfp-sad.svg";
@@ -22,6 +23,7 @@ function Emotion5({setOpen,setIsAuth, isAuth}){
     return(
         <div className="Emotion1">
             <div className="headerTab">
+                <div><Link className="headerTabButton" to='/emotiontotal'><img id="headerTabButtonImg70" src={pfp0}/><h3 id="headerTabButtonTxt02" className="subhead100">전체</h3></Link></div>
                 <div><Link className="headerTabButton" to='/emotion1'><img id="headerTabButtonImg70" src={pfp1}/><h3 id="headerTabButtonTxt02" className="subhead100">기쁨</h3></Link></div>
                 <div><Link className="headerTabButton" to='/emotion2'><img id="headerTabButtonImg70" src={pfp2}/><h3 id="headerTabButtonTxt02" className="subhead100">분노</h3></Link></div>
                 <div><Link className="headerTabButton" to='/emotion3'><img id="headerTabButtonImg70" src={pfp3}/><h3 id="headerTabButtonTxt02" className="subhead100">슬픔</h3></Link></div>

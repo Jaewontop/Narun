@@ -18,7 +18,7 @@ function Login({setOpen,setCurrentPage,setIsAuth,isAuth}){
         signInWithPopup(auth, provider).then((result) => {
             localStorage.setItem("isAuth",true);
             setIsAuth(true)
-            navigate("/");
+            navigate("/emotiontotal");
         })
     }
     
@@ -31,7 +31,7 @@ function Login({setOpen,setCurrentPage,setIsAuth,isAuth}){
             loginPassword
             );
             setIsAuth(true);
-            navigate("/emotion1");
+            navigate("/emotiontotal");
             
         } catch (error) {
             console.log(error.message);

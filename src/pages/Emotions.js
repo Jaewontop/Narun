@@ -37,7 +37,55 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
     const [image8, setImage8] = useState(null);
     const [image9, setImage9] = useState(null);
 
+    const [image10, setImage10] = useState(null);
+    const [image11, setImage11] = useState(null);
+    const [image12, setImage12] = useState(null);
+    const [image13, setImage13] = useState(null);
+    const [image14, setImage14] = useState(null);
+    const [image15, setImage15] = useState(null);
+    const [image16, setImage16] = useState(null);
+    const [image17, setImage17] = useState(null);
+    const [image18, setImage18] = useState(null);
+    const [image19, setImage19] = useState(null);
+
+    const [image20, setImage20] = useState(null);
+    const [image21, setImage21] = useState(null);
+    const [image22, setImage22] = useState(null);
+    const [image23, setImage23] = useState(null);
+    const [image24, setImage24] = useState(null);
+    const [image25, setImage25] = useState(null);
+    const [image26, setImage26] = useState(null);
+    const [image27, setImage27] = useState(null);
+    const [image28, setImage28] = useState(null);
+    const [image29, setImage29] = useState(null);
+
+    const [image30, setImage30] = useState(null);
+    const [image31, setImage31] = useState(null);
+    const [image32, setImage32] = useState(null);
+    const [image33, setImage33] = useState(null);
+    const [image34, setImage34] = useState(null);
+    const [image35, setImage35] = useState(null);
+    const [image36, setImage36] = useState(null);
+    const [image37, setImage37] = useState(null);
+    const [image38, setImage38] = useState(null);
+    const [image39, setImage39] = useState(null);
+
+    const [image40, setImage40] = useState(null);
+    const [image41, setImage41] = useState(null);
+    const [image42, setImage42] = useState(null);
+    const [image43, setImage43] = useState(null);
+    const [image44, setImage44] = useState(null);
+    const [image45, setImage45] = useState(null);
+    const [image46, setImage46] = useState(null);
+    const [image47, setImage47] = useState(null);
+    const [image48, setImage48] = useState(null);
+    const [image49, setImage49] = useState(null);
+
     const canvas = useRef(null);
+    const canvas2 = useRef(null);
+    const canvas3 = useRef(null);
+    const canvas4 = useRef(null);
+    const canvas5 = useRef(null);
      
     const background = [backgroundPFP];
     const backlight = [backlightPFP,backlightPFP2,backlightPFP3];
@@ -56,7 +104,7 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
     const [pfp4,setPfp4] = useState("");
     const [pfp5,setPfp5] = useState("");
 
-    const array1 = [0,2,4,4,0,0,0,0,0,0];
+    const array1 = [0,2,0,4,0,0,0,0,0,0];
     useEffect(() => {
         const pfpImage = new Image();
         pfpImage.src = background[array1[0]];
@@ -67,7 +115,7 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
         pfpImage1.onload = () => setImage1(pfpImage1);
 
         const pfpImage2 = new Image();
-        pfpImage2.src = planetbody[array1[4]];
+        pfpImage2.src = planetbody[array1[2]];
         pfpImage2.onload = () => setImage2(pfpImage2);
         
         const pfpImage3 = new Image();
@@ -117,281 +165,284 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
           setPfp1(myCanvas.toDataURL());
         }
     },[image,image2,image3,image4,image5,image5,image6,image7,image8,image9,canvas])
-    const array2 = [0,2,4,4,0,0,0,0,0,0];
+    const array2 = [0,2,1,4,0,0,0,0,0,0];
     useEffect(() => {
         const pfpImage = new Image();
         pfpImage.src = background[array2[0]];
-        pfpImage.onload = () => setImage(pfpImage);
+        pfpImage.onload = () => setImage10(pfpImage);
 
         const pfpImage1 = new Image();
         pfpImage1.src = backlight[array2[1]];
-        pfpImage1.onload = () => setImage1(pfpImage1);
+        pfpImage1.onload = () => setImage11(pfpImage1);
 
         const pfpImage2 = new Image();
-        pfpImage2.src = planetbody[array2[4]];
-        pfpImage2.onload = () => setImage2(pfpImage2);
+        pfpImage2.src = planetbody[array2[2]];
+        pfpImage2.onload = () => setImage12(pfpImage2);
         
         const pfpImage3 = new Image();
         pfpImage3.src = planetpattern[array2[3]];
-        pfpImage3.onload = () => setImage3(pfpImage3);
+        pfpImage3.onload = () => setImage13(pfpImage3);
         
         const pfpImage4 = new Image();
         pfpImage4.src = planetshade[array2[4]];
-        pfpImage4.onload = () => setImage4(pfpImage4);
+        pfpImage4.onload = () => setImage14(pfpImage4);
         
         const pfpImage5 = new Image();
         pfpImage5.src = eyes[array2[5]];
-        pfpImage5.onload = () => setImage5(pfpImage5);
+        pfpImage5.onload = () => setImage15(pfpImage5);
         
         const pfpImage6 = new Image();
         pfpImage6.src = mouth[array2[6]];
-        pfpImage6.onload = () => setImage6(pfpImage6);
+        pfpImage6.onload = () => setImage16(pfpImage6);
         
         const pfpImage7 = new Image();
         pfpImage7.src = mask[array2[7]];
-        pfpImage7.onload = () => setImage7(pfpImage7);
+        pfpImage7.onload = () => setImage17(pfpImage7);
         
         const pfpImage8 = new Image();
         pfpImage8.src = satellite[array2[8]];
-        pfpImage8.onload = () => setImage8(pfpImage8);
+        pfpImage8.onload = () => setImage18(pfpImage8);
         
         const pfpImage9 = new Image();
         pfpImage9.src = ring[array2[9]];
-        pfpImage9.onload = () => setImage9(pfpImage9);
+        pfpImage9.onload = () => setImage19(pfpImage9);
     }, [])
     useEffect(() => {
-        if(image && image1 && image2 && image3 && image4 && image5 && image6 && image7 && image8 && image9 && canvas) {
-          const ctx = canvas.current.getContext("2d")
+        if(image10 && image11 && image12 && image13 && image14 && image15 && image16 && image17 && image18 && image19 && canvas2) {
+          const ctx = canvas2.current.getContext("2d")
           ctx.fillStyle = "black"
           ctx.fillRect(0, 0, 360, 360)
-          ctx.drawImage(image, 0,0, 360,360)
-          ctx.drawImage(image1, 0,0, 360,360)
-          ctx.drawImage(image2, 0,0, 360,360)
-          ctx.drawImage(image3, 0,0, 360,360)
-          ctx.drawImage(image4, 0,0, 360,360)
-          ctx.drawImage(image5, 0,0, 360,360)
-          ctx.drawImage(image6, 0,0, 360,360)
-          ctx.drawImage(image7, 0,0, 360,360)
-          ctx.drawImage(image8, 0,0, 360,360)
-          ctx.drawImage(image9, 0,0, 360,360)
-          const myCanvas = document.querySelector("#canvas");
+          ctx.drawImage(image10, 0,0, 360,360)
+          ctx.drawImage(image11, 0,0, 360,360)
+          ctx.drawImage(image12, 0,0, 360,360)
+          ctx.drawImage(image13, 0,0, 360,360)
+          ctx.drawImage(image14, 0,0, 360,360)
+          ctx.drawImage(image15, 0,0, 360,360)
+          ctx.drawImage(image16, 0,0, 360,360)
+          ctx.drawImage(image17, 0,0, 360,360)
+          ctx.drawImage(image18, 0,0, 360,360)
+          ctx.drawImage(image19, 0,0, 360,360)
+          const myCanvas = document.querySelector("#canvas2");
           setPfp2(myCanvas.toDataURL());
         }
-    },[image,image2,image3,image4,image5,image5,image6,image7,image8,image9,canvas])
-    const array3 = [0,2,4,4,0,0,0,0,0,0];
+    },[image10,image11,image12,image13,image14,image15,image16,image17,image18,image19,canvas2])
+    const array3 = [0,2,2,4,0,0,0,0,0,0];
     useEffect(() => {
         const pfpImage = new Image();
         pfpImage.src = background[array3[0]];
-        pfpImage.onload = () => setImage(pfpImage);
+        pfpImage.onload = () => setImage20(pfpImage);
 
         const pfpImage1 = new Image();
         pfpImage1.src = backlight[array3[1]];
-        pfpImage1.onload = () => setImage1(pfpImage1);
+        pfpImage1.onload = () => setImage21(pfpImage1);
 
         const pfpImage2 = new Image();
-        pfpImage2.src = planetbody[array3[4]];
-        pfpImage2.onload = () => setImage2(pfpImage2);
+        pfpImage2.src = planetbody[array3[2]];
+        pfpImage2.onload = () => setImage22(pfpImage2);
         
         const pfpImage3 = new Image();
         pfpImage3.src = planetpattern[array3[3]];
-        pfpImage3.onload = () => setImage3(pfpImage3);
+        pfpImage3.onload = () => setImage23(pfpImage3);
         
         const pfpImage4 = new Image();
         pfpImage4.src = planetshade[array3[4]];
-        pfpImage4.onload = () => setImage4(pfpImage4);
+        pfpImage4.onload = () => setImage24(pfpImage4);
         
         const pfpImage5 = new Image();
         pfpImage5.src = eyes[array3[5]];
-        pfpImage5.onload = () => setImage5(pfpImage5);
+        pfpImage5.onload = () => setImage25(pfpImage5);
         
         const pfpImage6 = new Image();
         pfpImage6.src = mouth[array3[6]];
-        pfpImage6.onload = () => setImage6(pfpImage6);
+        pfpImage6.onload = () => setImage26(pfpImage6);
         
         const pfpImage7 = new Image();
         pfpImage7.src = mask[array3[7]];
-        pfpImage7.onload = () => setImage7(pfpImage7);
+        pfpImage7.onload = () => setImage27(pfpImage7);
         
         const pfpImage8 = new Image();
         pfpImage8.src = satellite[array3[8]];
-        pfpImage8.onload = () => setImage8(pfpImage8);
+        pfpImage8.onload = () => setImage28(pfpImage8);
         
         const pfpImage9 = new Image();
         pfpImage9.src = ring[array3[9]];
-        pfpImage9.onload = () => setImage9(pfpImage9);
+        pfpImage9.onload = () => setImage29(pfpImage9);
     }, [])
     useEffect(() => {
-        if(image && image1 && image2 && image3 && image4 && image5 && image6 && image7 && image8 && image9 && canvas) {
-          const ctx = canvas.current.getContext("2d")
+        if(image20 && image21 && image22 && image23 && image24 && image25 && image26 && image27 && image28 && image29 && canvas3) {
+          const ctx = canvas3.current.getContext("2d")
           ctx.fillStyle = "black"
           ctx.fillRect(0, 0, 360, 360)
-          ctx.drawImage(image, 0,0, 360,360)
-          ctx.drawImage(image1, 0,0, 360,360)
-          ctx.drawImage(image2, 0,0, 360,360)
-          ctx.drawImage(image3, 0,0, 360,360)
-          ctx.drawImage(image4, 0,0, 360,360)
-          ctx.drawImage(image5, 0,0, 360,360)
-          ctx.drawImage(image6, 0,0, 360,360)
-          ctx.drawImage(image7, 0,0, 360,360)
-          ctx.drawImage(image8, 0,0, 360,360)
-          ctx.drawImage(image9, 0,0, 360,360)
-          const myCanvas = document.querySelector("#canvas");
+          ctx.drawImage(image20, 0,0, 360,360)
+          ctx.drawImage(image21, 0,0, 360,360)
+          ctx.drawImage(image22, 0,0, 360,360)
+          ctx.drawImage(image23, 0,0, 360,360)
+          ctx.drawImage(image24, 0,0, 360,360)
+          ctx.drawImage(image25, 0,0, 360,360)
+          ctx.drawImage(image26, 0,0, 360,360)
+          ctx.drawImage(image27, 0,0, 360,360)
+          ctx.drawImage(image28, 0,0, 360,360)
+          ctx.drawImage(image29, 0,0, 360,360)
+          const myCanvas = document.querySelector("#canvas3");
           setPfp3(myCanvas.toDataURL());
         }
-    },[image,image2,image3,image4,image5,image5,image6,image7,image8,image9,canvas])
-    const array4 = [0,2,4,4,0,0,0,0,0,0];
+    },[image20,image21,image22,image23,image24,image25,image26,image27,image28,image29,canvas3])
+    const array4 = [0,2,3,4,0,0,0,0,0,0];
     useEffect(() => {
         const pfpImage = new Image();
         pfpImage.src = background[array4[0]];
-        pfpImage.onload = () => setImage(pfpImage);
+        pfpImage.onload = () => setImage30(pfpImage);
 
         const pfpImage1 = new Image();
         pfpImage1.src = backlight[array4[1]];
-        pfpImage1.onload = () => setImage1(pfpImage1);
+        pfpImage1.onload = () => setImage31(pfpImage1);
 
         const pfpImage2 = new Image();
-        pfpImage2.src = planetbody[array4[4]];
-        pfpImage2.onload = () => setImage2(pfpImage2);
+        pfpImage2.src = planetbody[array4[2]];
+        pfpImage2.onload = () => setImage32(pfpImage2);
         
         const pfpImage3 = new Image();
         pfpImage3.src = planetpattern[array4[3]];
-        pfpImage3.onload = () => setImage3(pfpImage3);
+        pfpImage3.onload = () => setImage33(pfpImage3);
         
         const pfpImage4 = new Image();
         pfpImage4.src = planetshade[array4[4]];
-        pfpImage4.onload = () => setImage4(pfpImage4);
+        pfpImage4.onload = () => setImage34(pfpImage4);
         
         const pfpImage5 = new Image();
         pfpImage5.src = eyes[array4[5]];
-        pfpImage5.onload = () => setImage5(pfpImage5);
+        pfpImage5.onload = () => setImage35(pfpImage5);
         
         const pfpImage6 = new Image();
         pfpImage6.src = mouth[array4[6]];
-        pfpImage6.onload = () => setImage6(pfpImage6);
+        pfpImage6.onload = () => setImage36(pfpImage6);
         
         const pfpImage7 = new Image();
         pfpImage7.src = mask[array4[7]];
-        pfpImage7.onload = () => setImage7(pfpImage7);
+        pfpImage7.onload = () => setImage37(pfpImage7);
         
         const pfpImage8 = new Image();
         pfpImage8.src = satellite[array4[8]];
-        pfpImage8.onload = () => setImage8(pfpImage8);
+        pfpImage8.onload = () => setImage38(pfpImage8);
         
         const pfpImage9 = new Image();
         pfpImage9.src = ring[array4[9]];
-        pfpImage9.onload = () => setImage9(pfpImage9);
+        pfpImage9.onload = () => setImage39(pfpImage9);
     }, [])
     useEffect(() => {
-        if(image && image1 && image2 && image3 && image4 && image5 && image6 && image7 && image8 && image9 && canvas) {
-          const ctx = canvas.current.getContext("2d")
+        if(image30 && image31 && image32 && image33 && image34 && image35 && image36 && image37 && image38 && image39 && canvas4) {
+          const ctx = canvas4.current.getContext("2d")
           ctx.fillStyle = "black"
           ctx.fillRect(0, 0, 360, 360)
-          ctx.drawImage(image, 0,0, 360,360)
-          ctx.drawImage(image1, 0,0, 360,360)
-          ctx.drawImage(image2, 0,0, 360,360)
-          ctx.drawImage(image3, 0,0, 360,360)
-          ctx.drawImage(image4, 0,0, 360,360)
-          ctx.drawImage(image5, 0,0, 360,360)
-          ctx.drawImage(image6, 0,0, 360,360)
-          ctx.drawImage(image7, 0,0, 360,360)
-          ctx.drawImage(image8, 0,0, 360,360)
-          ctx.drawImage(image9, 0,0, 360,360)
-          const myCanvas = document.querySelector("#canvas");
+          ctx.drawImage(image30, 0,0, 360,360)
+          ctx.drawImage(image31, 0,0, 360,360)
+          ctx.drawImage(image32, 0,0, 360,360)
+          ctx.drawImage(image33, 0,0, 360,360)
+          ctx.drawImage(image34, 0,0, 360,360)
+          ctx.drawImage(image35, 0,0, 360,360)
+          ctx.drawImage(image36, 0,0, 360,360)
+          ctx.drawImage(image37, 0,0, 360,360)
+          ctx.drawImage(image38, 0,0, 360,360)
+          ctx.drawImage(image39, 0,0, 360,360)
+          const myCanvas = document.querySelector("#canvas4");
           setPfp4(myCanvas.toDataURL());
         }
-    },[image,image2,image3,image4,image5,image5,image6,image7,image8,image9,canvas])
+    },[image30,image31,image32,image33,image34,image35,image36,image37,image38,image39,canvas4])
     const array5 = [0,2,4,4,0,0,0,0,0,0];
     useEffect(() => {
         const pfpImage = new Image();
         pfpImage.src = background[array5[0]];
-        pfpImage.onload = () => setImage(pfpImage);
+        pfpImage.onload = () => setImage40(pfpImage);
 
         const pfpImage1 = new Image();
         pfpImage1.src = backlight[array5[1]];
-        pfpImage1.onload = () => setImage1(pfpImage1);
+        pfpImage1.onload = () => setImage41(pfpImage1);
 
         const pfpImage2 = new Image();
-        pfpImage2.src = planetbody[array5[4]];
-        pfpImage2.onload = () => setImage2(pfpImage2);
+        pfpImage2.src = planetbody[array5[2]];
+        pfpImage2.onload = () => setImage42(pfpImage2);
         
         const pfpImage3 = new Image();
         pfpImage3.src = planetpattern[array5[3]];
-        pfpImage3.onload = () => setImage3(pfpImage3);
+        pfpImage3.onload = () => setImage43(pfpImage3);
         
         const pfpImage4 = new Image();
         pfpImage4.src = planetshade[array5[4]];
-        pfpImage4.onload = () => setImage4(pfpImage4);
+        pfpImage4.onload = () => setImage44(pfpImage4);
         
         const pfpImage5 = new Image();
         pfpImage5.src = eyes[array5[5]];
-        pfpImage5.onload = () => setImage5(pfpImage5);
+        pfpImage5.onload = () => setImage45(pfpImage5);
         
         const pfpImage6 = new Image();
         pfpImage6.src = mouth[array5[6]];
-        pfpImage6.onload = () => setImage6(pfpImage6);
+        pfpImage6.onload = () => setImage46(pfpImage6);
         
         const pfpImage7 = new Image();
         pfpImage7.src = mask[array5[7]];
-        pfpImage7.onload = () => setImage7(pfpImage7);
+        pfpImage7.onload = () => setImage47(pfpImage7);
         
         const pfpImage8 = new Image();
         pfpImage8.src = satellite[array5[8]];
-        pfpImage8.onload = () => setImage8(pfpImage8);
+        pfpImage8.onload = () => setImage48(pfpImage8);
         
         const pfpImage9 = new Image();
         pfpImage9.src = ring[array5[9]];
-        pfpImage9.onload = () => setImage9(pfpImage9);
+        pfpImage9.onload = () => setImage49(pfpImage9);
     }, [])
     useEffect(() => {
-        if(image && image1 && image2 && image3 && image4 && image5 && image6 && image7 && image8 && image9 && canvas) {
-          const ctx = canvas.current.getContext("2d")
+        if(image40 && image41 && image42 && image43 && image44 && image45 && image46 && image47 && image48 && image49 && canvas5) {
+          const ctx = canvas5.current.getContext("2d")
           ctx.fillStyle = "black"
           ctx.fillRect(0, 0, 360, 360)
-          ctx.drawImage(image, 0,0, 360,360)
-          ctx.drawImage(image1, 0,0, 360,360)
-          ctx.drawImage(image2, 0,0, 360,360)
-          ctx.drawImage(image3, 0,0, 360,360)
-          ctx.drawImage(image4, 0,0, 360,360)
-          ctx.drawImage(image5, 0,0, 360,360)
-          ctx.drawImage(image6, 0,0, 360,360)
-          ctx.drawImage(image7, 0,0, 360,360)
-          ctx.drawImage(image8, 0,0, 360,360)
-          ctx.drawImage(image9, 0,0, 360,360)
-          const myCanvas = document.querySelector("#canvas");
+          ctx.drawImage(image40, 0,0, 360,360)
+          ctx.drawImage(image41, 0,0, 360,360)
+          ctx.drawImage(image42, 0,0, 360,360)
+          ctx.drawImage(image43, 0,0, 360,360)
+          ctx.drawImage(image44, 0,0, 360,360)
+          ctx.drawImage(image45, 0,0, 360,360)
+          ctx.drawImage(image46, 0,0, 360,360)
+          ctx.drawImage(image47, 0,0, 360,360)
+          ctx.drawImage(image48, 0,0, 360,360)
+          ctx.drawImage(image49, 0,0, 360,360)
+          const myCanvas = document.querySelector("#canvas5");
           setPfp5(myCanvas.toDataURL());
         }
-    },[image,image2,image3,image4,image5,image5,image6,image7,image8,image9,canvas])
-
+    },[image40,image41,image42,image43,image44,image45,image46,image47,image48,image49,canvas5])
+    console.log("pfp1:"+pfp1);
+    console.log("pfp2:"+pfp2);
+    console.log("pfp3:"+pfp3);
+    console.log("pfp4:"+pfp4);
+    console.log("pfp5:"+pfp5);
     return(
         
         <div className="EmotionsBox">
-            <canvas id="canvas" ref={canvas} width={360}height={360}>
+            <canvas id="canvas" ref={canvas} width={360}height={360}/>
+            <canvas id="canvas2" ref={canvas2} width={360}height={360}/>
+            <canvas id="canvas3" ref={canvas3} width={360}height={360}/>
+            <canvas id="canvas4" ref={canvas4} width={360}height={360}/>
+            <canvas id="canvas5" ref={canvas5} width={360}height={360}/>
                 
-            </canvas>
+            
             <div className="Emotions">
                 <div className="happy_emotions">
                     <img className="pfpImage" src={pfp1}> 
-
                     </img>
                 </div>
                 <div className="happy_emotions">
                     <img className="pfpImage" src={pfp2}> 
-
                     </img>
                 </div>
                 <div className="happy_emotions">
                     <img className="pfpImage" src={pfp3}> 
-
                     </img>
                 </div>
                 <div className="happy_emotions">
                     <img className="pfpImage" src={pfp4}> 
-
                     </img>
                 </div>
                 <div className="happy_emotions">
                     <img className="pfpImage" src={pfp5}> 
-
                     </img>
                 </div>
             </div>

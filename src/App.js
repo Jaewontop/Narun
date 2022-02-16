@@ -19,6 +19,7 @@ import Emotion4 from './pages/Emotion4';
 import Emotion5 from './pages/Emotion5';
 import Emotions from './pages/Emotions';
 import Signup from './pages/Signup';
+import EmotionTotal from './pages/EmotionTotal';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -47,7 +48,12 @@ function App() {
     setUser(currentUser);
     if(user?.email){
       console.log(user.email);
+      console.log("user:"+user.displayName);
       setIsAuth(true);
+    }
+    if(user?.displayName){
+      console.log(user.displayName);
+      
     }
   })
   return (
@@ -56,9 +62,9 @@ function App() {
         <div className="home_nav">
             <button className="hamburgerButton" onClick={()=>{toggleButton()}}><Hamburger duration={0.7} size={24} toggled={isOpen} toggle={setOpen} /></button>
             <div id="toggleBar">
-                <Link className="toggleBarLink" to='/emotion1'>감정일기</Link>
+                <Link className="toggleBarLink" to='/emotiontotal'>감정일기</Link>
                 <Link className="toggleBarLink" to='/emotions'>나른 PFP</Link>
-                {isAuth ? ( <Link className="toggleBarLink" to='/'onClick={signUserOut}>logOut</Link>)
+                {isAuth ? ( <Link className="toggleBarLink" to='/'onClick={signUserOut}>logOut{user.displayName}</Link>)
                 :<Link className="toggleBarLink" to='/login'>로그인</Link>}
             </div>
             <Link to='/'><div className="service_title">{currentPage}</div></Link>
@@ -73,6 +79,7 @@ function App() {
         <Route path="/signup" element={<Signup setOpen={setOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth}/>}></Route>
         <Route path="/createpost" element={<CreatePost setOpen={setOpen} isAuth ={isAuth}/>}></Route>
         <Route path="/profile" element={<Profile setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
+        <Route path='/emotiontotal' element={<EmotionTotal setOpen={setOpen} isOpen={isOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion1' element={<Emotion1 setOpen={setOpen} isOpen={isOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion2' element={<Emotion2 setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion3' element={<Emotion3 setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
