@@ -8,67 +8,63 @@ import { getDownloadURL} from "firebase/storage";
 import pfp from '../img/user_avatar-default.svg';
 import messenger from '../img/Union.svg';
 import heart from '../img/heart.svg';
+import hearted from '../img/hearted.svg';
 import CommentMore from './CommentMore';
-import { browserSessionPersistence, setPersistence } from "firebase/auth";
+import { browserSessionPersistence, setPersistence,onAuthStateChanged } from "firebase/auth";
 // let commentToggle=[];
 function HomeTitle({ setIsAuth,isAuth,posts }) {
   const [postLists, setPostList] = useState([]);
   const [comment, setComment] = useState([]);
   const [commentToggle,setCommentToggle] =useState('asd');
-
-
+  const [user,setUser] = useState({});
+  const [whichPostUserLike,setWhichPostUserLike] = useState([]);
 
   const postsCollectionRef = collection(db, posts);
-  // console.log("home");
+  onAuthStateChanged(auth,(currentUser)=>{
+    setUser(currentUser);
+  });
   useEffect(()=>{
 
     onSnapshot(postsCollectionRef, (snapshot)=>
+      // snapshot.docs.map((doc)=>{
+      //   if(doc.data().like.includes(user.uid)){
+
+      //   }
+      // })
       setPostList(snapshot.docs.map((doc)=>({
         ...doc.data(),id:doc.id
       })))
+      
     );
-    // const q = query(collection(db,'posts'));
-    // const unsubscribe = onSnapshot(q, (querySnapshot)=>{
-    //   querySnapshot.forEach((doc)=>{
-    //     setComments(doc.data().comment)
-    //   })
-    // })
+    console.log(postLists);
+    
   },false)
-  // getDownloadURL(ref(storage, 'files/st_pfp1.svg'))
-  // .then((url) => {
-  //     //inserted into an <img> element
-  //     const img = document.getElementById('myimg');
-  //     img.setAttribute('src', url);
-  //     profileImg = url;
-  //     // console.log(profileImg);
-  // })
-  // .catch((error) => {
-  //     console.log(error);
-  // });
-  // console.log(posts[0].commentCount);
   const deletePost = async (id) => {
     const postDoc = doc(db, posts, id);
     await deleteDoc(postDoc);
   };
+  onAuthStateChanged(auth,(currentUser)=>{
+    setUser(currentUser);
+  });
   const addComment = async (id) =>{
-    // var input = document.getElementById('commentAddInput');
-    // input.value('');
     const postDoc = doc(db, posts, id);
     const docSnap = await getDoc(postDoc);
     let commentCount = docSnap.data().commentCount;
     commentCount =  commentCount +1;
-    await updateDoc(postDoc,{comment:arrayUnion(comment),commentPeople:arrayUnion(auth.currentUser.displayName),commentCount:commentCount});
+    await updateDoc(postDoc,{comment:arrayUnion(comment),commentPeople:arrayUnion(user.displayName),commentCount:commentCount});
   };
   const commentToggles = async (id) =>{
     setCommentToggle(id);
   }
+  
+  
+  let likeCount = 0;
   const addLike = async (id) =>{
     if(isAuth){
       const postDoc = doc(db, posts, id);
       const docSnap = await getDoc(postDoc);
-      let likeCount = docSnap.data().likeCount;
+      likeCount = docSnap.data().likeCount;
       var userLike = 0;
-      // like 하는 사람이 user인지 확인
       if(likeCount>0){
         docSnap.data().like.forEach(liker=>
           {
@@ -78,7 +74,6 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
           }
         )
       }
-  
       if(userLike){
         likeCount = likeCount - 1;
         await updateDoc(postDoc,{likeCount:likeCount,like:arrayRemove(auth.currentUser.uid)});
@@ -86,7 +81,6 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
       else{
         likeCount = likeCount+1;
         await updateDoc(postDoc,{likeCount:likeCount,like:arrayUnion(auth.currentUser.uid)});
-
       }
     }
     else{
@@ -128,7 +122,7 @@ function HomeTitle({ setIsAuth,isAuth,posts }) {
             
             <div className="postTextContainer"> {post.postText} </div>
             <div className="likeAndComment">
-              <button className="likeButton" id={post.id} onClick={()=>{if(post.author.id===auth.currentUser.uid){alert("본인 게사물에는 좋아요를 누를 수 없습니다")} else{addLike(post.id);}  }}><img src={heart}/><h2 id="wholikeTxt"className="caption100"> 님 외 여러 명이 좋아합니다.</h2></button>
+              <button className="likeButton" id={post.id} onClick={()=>{if(post.author.id===auth.currentUser.uid){alert("본인 게사물에는 좋아요를 누를 수 없습니다")} else{addLike(post.id);}  }}>{post.like.includes(user.uid)?<img src={heart}/>:<img src={hearted}/>}<h2 id="wholikeTxt"className="caption100"> {likeCount>=2?"님 외 여러 명이 좋아합니다.":"님 외 여러 명이 좋아했으면 좋겠습니다."}</h2></button>
               <div className="commentCount"><img src={messenger}/><h2 id="commentCountTxt"className="caption100">{post.commentCount}{}</h2></div>
             </div>
             {(post.commentCount<=1)?
