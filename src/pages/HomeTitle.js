@@ -16,13 +16,12 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
   const [postLists, setPostList] = useState([]);
   const [comment, setComment] = useState([]);
   const [commentToggle,setCommentToggle] =useState('asd');
-
+  const [dsName,setDsName] = useState([]);
   const [whichPostUserLike,setWhichPostUserLike] = useState([]);
 
   const postsCollectionRef = collection(db, posts);
 
   useEffect(()=>{
-
     onSnapshot(postsCollectionRef, (snapshot)=>
       // snapshot.docs.map((doc)=>{
       //   if(doc.data().like.includes(user.uid)){
@@ -34,7 +33,7 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
       })))
       
     );
-    console.log(postLists);
+    // console.log(postLists);
     
   },false)
   const deletePost = async (id) => {
@@ -51,7 +50,19 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
     }
     commentCount =  commentCount +1;
     console.log("userdisplayName:"+user.displayName);
-    await updateDoc(postDoc,{comment:arrayUnion(comment),commentPeople:arrayUnion(user.displayName),commentCount:commentCount});
+    var emotionNum = 0;
+    // console.log(comment);
+    if(posts=='posts'){
+      emotionNum = docSnap.data().emotion;
+      // console.log("emotionNum:"+emotionNum);
+      
+      await updateDoc(doc(db,'posts',id),{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
+      await updateDoc(doc(db,'post'+emotionNum,id),{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
+    }
+    else{
+      await updateDoc(doc(db,'posts',id),{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
+      await updateDoc(postDoc,{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
+    }
   };
   const commentToggles = async (id) =>{
     setCommentToggle(id);
@@ -75,12 +86,23 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
           }
         )
       }
+      var emotionNum = 0;
+      emotionNum = docSnap.data().emotion;
+      console.log(emotionNum);
       if(userLike){
         likeCount = likeCount - 1;
+        if(posts=='posts'){
+          await updateDoc(doc(db,'post'+emotionNum,id),{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
+        }
+        await updateDoc(doc(db,'posts',id),{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
         await updateDoc(postDoc,{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
       }
       else{
         likeCount = likeCount+1;
+        if(posts=='posts'){
+          await updateDoc(doc(db,'post'+emotionNum,id),{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
+        }
+        await updateDoc(doc(db,'posts',id),{likeCount:likeCount,like:arrayUnion(auth.currentUser.displayName)});
         await updateDoc(postDoc,{likeCount:likeCount,like:arrayUnion(auth.currentUser.displayName)});
       }
     }
@@ -90,6 +112,9 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
   }
   const inputPress = async(e,id) => {
     console.log("inputkeypressed, e:"+e+" id:"+id);
+    if(e==1){
+      await(addComment(id));
+    }
     if(e.key=='Enter'){
       await addComment(id);
     }
@@ -153,8 +178,8 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
             
             <div className="inputAndButton">
             {/* onBlur={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="none";var input1 = document.getElementById('commentAddInput'+post.id);input1.style.borderTopRightRadius= "8px";input1.style.borderBottomRightRadius="8px";}} */}
-              <input onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.value='';input.style.display="block";var input1 = document.getElementById('commentAddInput'+post.id);input1.style.borderTopRightRadius= "0px";input1.style.borderBottomRightRadius="0px";}} id={"commentAddInput"+post.id}onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value)}}/>
-              <button id={post.id+'button'} style={commentButtonStyle} className="commentSendButton" onClick={()=>{addComment(post.id)}}><h3 className="subhead100">등록</h3></button> 
+              <input onBlur={(e)=>{var input1 = document.getElementById('commentAddInput'+post.id);input1.value="";}}onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.value='';input.style.display="block";var input1 = document.getElementById('commentAddInput'+post.id);input1.style.borderTopRightRadius= "0px";input1.style.borderBottomRightRadius="0px";}} id={"commentAddInput"+post.id}onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value);setDsName(user.displayName);}}/>
+              <button id={post.id+'button'} style={commentButtonStyle} className="commentSendButton" onClick={(e)=>{inputPress(1,post.id);console.log(e);}}><h3 className="subhead100">등록</h3></button> 
             </div>
             </div>
           

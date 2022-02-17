@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {addDoc,collection} from "firebase/firestore";
+import {addDoc,doc,getDoc,setDoc,collection, updateDoc} from "firebase/firestore";
 import {db,auth} from '../firebase-config';
 import {useNavigate,Link} from 'react-router-dom';
 import {storage} from '../firebase-config';
@@ -24,8 +24,14 @@ function CreatePost({user,setOpen, setCurrentPage,isAuth,posts}){
     console.log(postName);
     const postsCollectionRef = collection(db, postName);
     const createPost = async () => {
-        await addDoc(postsCollectionRef, {title,postText,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
-        await addDoc(collection(db,"posts"),{title,postText,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
+        const docnumdoc = doc(db, 'docnum','IYhbCxzVItcNB9GNBaRm');
+        const docSnap = await getDoc(docnumdoc);
+        var docnum = docSnap.data().docnum;
+        docnum = docnum +1 ;
+        await updateDoc(docnumdoc,{docnum:docnum});
+        docnum = String(docnum);
+        await setDoc(doc(db,postName,docnum), {title,postText,emotion:emotionSelect,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
+        await setDoc(doc(db,'posts',docnum),{title,postText,emotion:emotionSelect,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
         navigate('/emotiontotal');
     }
     useEffect(()=>{
