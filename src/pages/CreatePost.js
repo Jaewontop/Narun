@@ -12,7 +12,7 @@ import pfp2 from "../img/pfp-mad.svg";
 import pfp3 from "../img/pfp-sad.svg";
 import pfp4 from "../img/pfp-love.svg";
 import pfp5 from "../img/pfp-worry.svg";
-function CreatePost({setOpen, setCurrentPage,isAuth,posts}){
+function CreatePost({user,setOpen, setCurrentPage,isAuth,posts}){
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
     // setCurrentPage("글쓰기");
@@ -24,8 +24,8 @@ function CreatePost({setOpen, setCurrentPage,isAuth,posts}){
     console.log(postName);
     const postsCollectionRef = collection(db, postName);
     const createPost = async () => {
-        await addDoc(postsCollectionRef, {title,postText,comment:[],commentCount:0,author:{name:auth.currentUser.displayName,id:auth.currentUser.uid},likeCount:0,like:[]});
-        await addDoc(collection(db,"posts"),{title,postText,comment:[],commentCount:0,author:{name:auth.currentUser.displayName,id:auth.currentUser.uid},likeCount:0,like:[]});
+        await addDoc(postsCollectionRef, {title,postText,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
+        await addDoc(collection(db,"posts"),{title,postText,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
         navigate('/emotiontotal');
     }
     useEffect(()=>{
@@ -36,12 +36,12 @@ function CreatePost({setOpen, setCurrentPage,isAuth,posts}){
     
     return(
         <div className = "createPostPage">
-             <div className="headerTab">
-                {emotionSelect==1?<div><div onClick={()=>{setEmotionSelect(1);}}className="headerTabButton"><img id="headerTabButtonImg100" src={pfp1}/><h3 id="headerTabButtonTxt1" className="subhead100">기쁨</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(1);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp1}/><h3 id="headerTabButtonTxt02" className="subhead100">기쁨</h3></div></div>}
-                {emotionSelect==2?<div><div onClick={()=>{setEmotionSelect(2);}}className="headerTabButton"><img id="headerTabButtonImg100" src={pfp2}/><h3 id="headerTabButtonTxt1" className="subhead100">분노</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(2);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp2}/><h3 id="headerTabButtonTxt02" className="subhead100">분노</h3></div></div>}
-                {emotionSelect==3?<div><div onClick={()=>{setEmotionSelect(3);}}className="headerTabButton"><img id="headerTabButtonImg100" src={pfp3}/><h3 id="headerTabButtonTxt1" className="subhead100">슬픔</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(3);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp3}/><h3 id="headerTabButtonTxt02" className="subhead100">슬픔</h3></div></div>}
-                {emotionSelect==4?<div><div onClick={()=>{setEmotionSelect(4);}}className="headerTabButton"><img id="headerTabButtonImg100" src={pfp4}/><h3 id="headerTabButtonTxt1" className="subhead100">걱정</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(4);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp4}/><h3 id="headerTabButtonTxt02" className="subhead100">걱정</h3></div></div>}
-                {emotionSelect==5?<div><div onClick={()=>{setEmotionSelect(5);}}className="headerTabButton"><img id="headerTabButtonImg100" src={pfp5}/><h3 id="headerTabButtonTxt1" className="subhead100">사랑</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(5);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp5}/><h3 id="headerTabButtonTxt02" className="subhead100">사랑</h3></div></div>}
+             <div className="headerTab1">
+                {emotionSelect==1?<div><div onClick={()=>{setEmotionSelect(1);}}className="headerTabButton2"><img id="headerTabButtonImg100" src={pfp1}/><h3 id="headerTabButtonTxt1" className="subhead100">기쁨</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(1);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp1}/><h3 id="headerTabButtonTxt02" className="subhead100">기쁨</h3></div></div>}
+                {emotionSelect==2?<div><div onClick={()=>{setEmotionSelect(2);}}className="headerTabButton2"><img id="headerTabButtonImg100" src={pfp2}/><h3 id="headerTabButtonTxt1" className="subhead100">분노</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(2);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp2}/><h3 id="headerTabButtonTxt02" className="subhead100">분노</h3></div></div>}
+                {emotionSelect==3?<div><div onClick={()=>{setEmotionSelect(3);}}className="headerTabButton2"><img id="headerTabButtonImg100" src={pfp3}/><h3 id="headerTabButtonTxt1" className="subhead100">슬픔</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(3);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp3}/><h3 id="headerTabButtonTxt02" className="subhead100">슬픔</h3></div></div>}
+                {emotionSelect==4?<div><div onClick={()=>{setEmotionSelect(4);}}className="headerTabButton2"><img id="headerTabButtonImg100" src={pfp4}/><h3 id="headerTabButtonTxt1" className="subhead100">걱정</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(4);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp4}/><h3 id="headerTabButtonTxt02" className="subhead100">걱정</h3></div></div>}
+                {emotionSelect==5?<div><div onClick={()=>{setEmotionSelect(5);}}className="headerTabButton2"><img id="headerTabButtonImg100" src={pfp5}/><h3 id="headerTabButtonTxt1" className="subhead100">사랑</h3></div></div>:<div><div onClick={()=>{setEmotionSelect(5);}}className="headerTabButton"><img id="headerTabButtonImg70" src={pfp5}/><h3 id="headerTabButtonTxt02" className="subhead100">사랑</h3></div></div>}
             </div>
             <div className="createPostBox">
                 <div className="diaryTitle">

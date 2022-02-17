@@ -323,8 +323,14 @@ textarea:focus{
   font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
   font-weight:400;
   font-size:10px;
-  line-height: 15px;
   color:#C6C6CF;
+  width:226px;
+  word-break:break-all;
+  display:flex;
+  height:20px;
+  align-items: center;
+  justify-content: left;
+  line-height: 0px;
 }
 .commentAndPeople{
   width:100%;
@@ -332,16 +338,16 @@ textarea:focus{
   display:flex;
   align-items: center;
   margin-bottom: -10px;
-  /* border:1px solid white; */
   text-align: center;
 }
-.commentAndPeople h1{
+.commentAndPeople > .caption150{/*높이 안맞음*/
+  font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+  font-size:12px;
   color:#C6C6CF;
   display:flex;
+  height:30px;
   align-items: center;
-  text-align: center;
-  /* border:1px solid; */
-  line-height: 10px;
+  /* text-align: center; */
 }
 #commentMoreTxt{
   color:#275EFB;
@@ -359,31 +365,41 @@ textarea:focus{
 }
 .commentShowBox{
   width:100%;
+  margin-bottom:16px;
 }
 .postCommentInput{
   background-color: #2A3247;
   width: 100%;
   height: 42px;
   border:none;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-left:12px;
 }
-.postCommentInput::placeholder{
-  margin-left: 10px;
-}
+
 .commentSendButton{
   display:none;
   /* display:block; */
-  background-color: #161C2D;
-  color:white;
+  background-color: #2A3247;
+  width:50px;
+  height:44px;
   border:none;
+  border-top-right-radius:8px;
+  border-bottom-right-radius:8px;
 }
 .inputAndButton{
   width:100%;
   display:flex;
+  align-items: center;
 }
 /* .postCommentInput:focus{
 
 } */
+.commentSendButton > .subhead100{
+  color:#275EFB;
+}
 .logoutButton{
   border:none;
   background-color: black;
@@ -500,6 +516,27 @@ textarea:focus{
   margin-left: 3.5px;
   z-index: -10;
   /* border:1px solid yellow; */
+}
+.headerTabButton2{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:0px;
+  width:100%;
+  z-index: -10;
+}
+.headerTab1{
+  display:flex;
+  width:95%;
+  white-space: nowrap; 
+  overflow-x:scroll;
+  justify-content: space-between;
+  padding:0;
+  margin:0;
+  align-items: space-between;
+  height:15vh;
+  padding-top: 20px;
+  margin-top: 80px;
 }
 #headerTabButtonImg70{width:62px;height:62px;opacity:70%; border:none;border-radius: 50%;}#headerTabButtonImg100{width:62px; height:62px; border-radius:50%;opacity:100%; border:1px solid white;border-radius: 50%;}
 #headerTabButtonTxt1{color:rgba(255,255,255,1)}

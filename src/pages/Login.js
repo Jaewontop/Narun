@@ -17,9 +17,10 @@ function Login({setOpen,setCurrentPage,setIsAuth,isAuth}){
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider).then((result) => {
             localStorage.setItem("isAuth",true);
-            setIsAuth(true)
-            navigate("/emotiontotal");
+            setIsAuth(true);
+            
         })
+        navigate("/emotiontotal");
     }
     
     

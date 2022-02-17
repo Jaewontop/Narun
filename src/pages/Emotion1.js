@@ -10,7 +10,7 @@ import pfp3 from "../img/pfp-sad.svg";
 import pfp4 from "../img/pfp-love.svg";
 import pfp5 from "../img/pfp-worry.svg";
 
-function Emotion1({setOpen,setCurrentPage,setIsAuth, isAuth}){
+function Emotion1({user,setOpen,setCurrentPage,setIsAuth, isAuth}){
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
     var navigate = useNavigate();
@@ -32,7 +32,7 @@ function Emotion1({setOpen,setCurrentPage,setIsAuth, isAuth}){
                 <div><Link className="headerTabButton1" to='/emotion5'><img id="headerTabButtonImg70" src={pfp5}/><h3 id="headerTabButtonTxt02" className="subhead100">사랑</h3></Link></div>
             </div>
             <div className="posts">
-                <HomeTitle setIsAuth={setIsAuth} isAuth = {isAuth} posts={"post1"} />
+                <HomeTitle user={user}setIsAuth={setIsAuth} isAuth = {isAuth} posts={"post1"} />
             </div>
         </div>
         

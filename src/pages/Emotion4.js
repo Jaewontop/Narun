@@ -11,7 +11,7 @@ import pfp3 from "../img/pfp-sad.svg";
 import pfp4 from "../img/pfp-love.svg";
 import pfp5 from "../img/pfp-worry.svg";
 
-function Emotion4({setOpen,setIsAuth, isAuth}){
+function Emotion4({user,setOpen,setIsAuth, isAuth}){
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
     var navigate = useNavigate();
@@ -24,14 +24,14 @@ function Emotion4({setOpen,setIsAuth, isAuth}){
         <div className="Emotion1">
             <div className="headerTab">
                 <div><Link className="headerTabButton" to='/emotiontotal'><img id="headerTabButtonImg70" src={pfp0}/><h3 id="headerTabButtonTxt02" className="subhead100">전체</h3></Link></div>
-                <div><Link className="headerTabButton" to='/emotion1'><img id="headerTabButtonImg70" src={pfp1}/><h3 id="headerTabButtonTxt02" className="subhead100">기쁨</h3></Link></div>
-                <div><Link className="headerTabButton" to='/emotion2'><img id="headerTabButtonImg70" src={pfp2}/><h3 id="headerTabButtonTxt02" className="subhead100">분노</h3></Link></div>
-                <div><Link className="headerTabButton" to='/emotion3'><img id="headerTabButtonImg70" src={pfp3}/><h3 id="headerTabButtonTxt02" className="subhead100">슬픔</h3></Link></div>
-                <div><Link className="headerTabButton" to='/emotion4'><img id="headerTabButtonImg100" src={pfp4}/><h3 id="headerTabButtonTxt1" className="subhead100">걱정</h3></Link></div>
-                <div><Link className="headerTabButton" to='/emotion5'><img id="headerTabButtonImg70" src={pfp5}/><h3 id="headerTabButtonTxt02" className="subhead100">사랑</h3></Link></div>
+                <div><Link className="headerTabButton1" to='/emotion1'><img id="headerTabButtonImg70" src={pfp1}/><h3 id="headerTabButtonTxt02" className="subhead100">기쁨</h3></Link></div>
+                <div><Link className="headerTabButton1" to='/emotion2'><img id="headerTabButtonImg70" src={pfp2}/><h3 id="headerTabButtonTxt02" className="subhead100">분노</h3></Link></div>
+                <div><Link className="headerTabButton1" to='/emotion3'><img id="headerTabButtonImg70" src={pfp3}/><h3 id="headerTabButtonTxt02" className="subhead100">슬픔</h3></Link></div>
+                <div><Link className="headerTabButton1" to='/emotion4'><img id="headerTabButtonImg100" src={pfp4}/><h3 id="headerTabButtonTxt1" className="subhead100">걱정</h3></Link></div>
+                <div><Link className="headerTabButton1" to='/emotion5'><img id="headerTabButtonImg70" src={pfp5}/><h3 id="headerTabButtonTxt02" className="subhead100">사랑</h3></Link></div>
             </div>
             <div className="posts">
-                <HomeTitle setIsAuth={setIsAuth} isAuth = {isAuth} posts={"post3"} />
+                <HomeTitle user={user}setIsAuth={setIsAuth} isAuth = {isAuth} posts={"post4"} />
             </div>
         </div>
     )
