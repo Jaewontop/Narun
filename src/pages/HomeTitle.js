@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { getDoc, updateDoc,arrayUnion, onSnapshot, collection, deleteDoc, doc, arrayRemove, QuerySnapshot ,query} from "firebase/firestore";
+import { getDoc, updateDoc,arrayUnion, onSnapshot, setDoc,collection, deleteDoc, doc, arrayRemove, QuerySnapshot ,query} from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import {Link} from 'react-router-dom';
 import {storage} from '../firebase-config';
@@ -16,11 +16,12 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
   const [postLists, setPostList] = useState([]);
   const [comment, setComment] = useState([]);
   const [commentToggle,setCommentToggle] =useState('asd');
-  const [dsName,setDsName] = useState([]);
   const [whichPostUserLike,setWhichPostUserLike] = useState([]);
-
+  const [currentUser,setCurrentUser] = useState({});
   const postsCollectionRef = collection(db, posts);
-
+  onAuthStateChanged(auth,(User)=>{
+    setCurrentUser(User);
+  })
   useEffect(()=>{
     onSnapshot(postsCollectionRef, (snapshot)=>
       // snapshot.docs.map((doc)=>{
@@ -41,6 +42,7 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
     await deleteDoc(postDoc);
   };
   const addComment = async (id) =>{
+    console.log(comment);
     const postDoc = doc(db, posts, id);
     const docSnap = await getDoc(postDoc);
     let commentCount = docSnap.data().commentCount;
@@ -49,19 +51,25 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
       return 0;
     }
     commentCount =  commentCount +1;
-    console.log("userdisplayName:"+user.displayName);
+    // console.log("userdisplayName:"+user.displayName);
     var emotionNum = 0;
-    // console.log(comment);
+    // console.log(comment); updateDoc함수가 조금 불안정함.
     if(posts=='posts'){
       emotionNum = docSnap.data().emotion;
-      // console.log("emotionNum:"+emotionNum);
-      
-      await updateDoc(doc(db,'posts',id),{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
-      await updateDoc(doc(db,'post'+emotionNum,id),{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
+      var comments = docSnap.data().comment;
+      comments.push(comment);
+      var commentPeoples = docSnap.data().commentPeople;
+      commentPeoples.push(user.displayName);
+      await setDoc(doc(db,'posts',id),{...docSnap.data(),comment:comments,commentPeople:commentPeoples,commentCount:commentCount});
+      await setDoc(doc(db,'post'+emotionNum,id),{...docSnap.data(),comment:comments,commentPeople:commentPeoples,commentCount:commentCount});
     }
     else{
-      await updateDoc(doc(db,'posts',id),{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
-      await updateDoc(postDoc,{comment:arrayUnion(comment),commentPeople:arrayUnion(dsName),commentCount:commentCount});
+      var comments = docSnap.data().comment;
+      comments.push(comment);
+      var commentPeoples = docSnap.data().commentPeople;
+      commentPeoples.push(user.displayName);
+      await setDoc(doc(db,'posts',id),{...docSnap.data(),comment:comments,commentPeople:commentPeoples,commentCount:commentCount});
+      await setDoc(postDoc,{...docSnap.data(),comment:comments,commentPeople:commentPeoples,commentCount:commentCount});
     }
   };
   const commentToggles = async (id) =>{
@@ -92,15 +100,18 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
       if(userLike){
         likeCount = likeCount - 1;
         if(posts=='posts'){
+          // console.log("auth.currentUser.displayName:"+auth.currentUser.displayName);
           await updateDoc(doc(db,'post'+emotionNum,id),{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
         }
+        // console.log("auth.currentUser.displayName:"+auth.currentUser.displayName);
         await updateDoc(doc(db,'posts',id),{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
         await updateDoc(postDoc,{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
       }
       else{
+        // console.log("auth.currentUser.displayName:"+auth.currentUser.displayName);
         likeCount = likeCount+1;
         if(posts=='posts'){
-          await updateDoc(doc(db,'post'+emotionNum,id),{likeCount:likeCount,like:arrayRemove(auth.currentUser.displayName)});
+          await updateDoc(doc(db,'post'+emotionNum,id),{likeCount:likeCount,like:arrayUnion(auth.currentUser.displayName)});
         }
         await updateDoc(doc(db,'posts',id),{likeCount:likeCount,like:arrayUnion(auth.currentUser.displayName)});
         await updateDoc(postDoc,{likeCount:likeCount,like:arrayUnion(auth.currentUser.displayName)});
@@ -111,13 +122,14 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
     }
   }
   const inputPress = async(e,id) => {
-    console.log("inputkeypressed, e:"+e+" id:"+id);
-    if(e==1){
-      await(addComment(id));
-    }
+    // console.log("inputkeypressed, e:"+e+" id:"+id);
+    // console.log(comment);
+    
     if(e.key=='Enter'){
+      // var input = document.getElementById("commentAddInput"+id);input.value='';
       await addComment(id);
     }
+
   }
   const commentButtonStyle={
     postion:"absolute",
@@ -177,9 +189,8 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
             }
             
             <div className="inputAndButton">
-            {/* onBlur={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="none";var input1 = document.getElementById('commentAddInput'+post.id);input1.style.borderTopRightRadius= "8px";input1.style.borderBottomRightRadius="8px";}} */}
-              <input onBlur={(e)=>{var input1 = document.getElementById('commentAddInput'+post.id);input1.value="";}}onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.value='';input.style.display="block";var input1 = document.getElementById('commentAddInput'+post.id);input1.style.borderTopRightRadius= "0px";input1.style.borderBottomRightRadius="0px";}} id={"commentAddInput"+post.id}onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value);setDsName(user.displayName);}}/>
-              <button id={post.id+'button'} style={commentButtonStyle} className="commentSendButton" onClick={(e)=>{inputPress(1,post.id);console.log(e);}}><h3 className="subhead100">등록</h3></button> 
+              <input  onBlur={(e)=>{var input1 = document.getElementById('commentAddInput'+post.id);input1.style.borderTopRightRadius= "8px";input1.style.borderBottomRightRadius="8px";var input = document.getElementById(post.id+'button');input.style.display="none";input1.value='';}} onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="block";var input1 = document.getElementById('commentAddInput'+post.id);input1.value='';input1.style.borderTopRightRadius= "0px";input1.style.borderBottomRightRadius="0px";}} id={"commentAddInput"+post.id}onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value);}}/>
+              <button id={post.id+'button'} style={commentButtonStyle} className="commentSendButton" onClick={()=>{addComment(post.id)}}><h3 className="subhead100">등록</h3></button> 
             </div>
             </div>
           
