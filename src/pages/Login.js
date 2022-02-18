@@ -51,11 +51,11 @@ function Login({setOpen,setCurrentPage,setIsAuth,isAuth}){
                 <div>
                     <button onClick={()=>{login()}}className="loginButton">로그인</button>
                     <div className="loginFindandSignup">
-                        <Link to='/idfind' className="loginFindandSignupText">아이디 찾기</Link>
+                        <button onClick={()=>{alert("아직 제공하지 않는 기능입니다! 열심히 준비중이니 조금만 기다려주세요~")}}className="loginFindandSignupText">아이디 찾기</button>
                         <div className="loginBreakLine" >|</div>
-                        <Link to='/pwfind' className="loginFindandSignupText">비밀번호 찾기</Link>
+                        <button onClick={()=>{alert("아직 제공하지 않는 기능입니다! 열심히 준비중이니 조금만 기다려주세요~")}} className="loginFindandSignupText">비밀번호 찾기</button>
                         <div className="loginBreakLine">|</div>
-                        <Link to='/signup' className="loginFindandSignupText">회원가입</Link>
+                        <button onClick={()=>{alert("아직 제공하지 않는 기능입니다! 열심히 준비중이니 조금만 기다려주세요~")}} className="loginFindandSignupText">회원가입</button>
                     </div>
                 </div>
             

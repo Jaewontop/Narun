@@ -1,16 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react';
-// const imageSrc =[
-//     ['../pfpimg/01background/background-default.svg'],
-//     ['../pfpimg/02backlight/backlight-1.svg','../pfpimg/02backlight/backlight-2.svg','../pfpimg/02backlight/backlight-3.svg'],
-//     ['../pfpimg/03planetbody/planet_body-green.svg','../pfpimg/03planetbody/planet_body-orange.svg','../pfpimg/03planetbody/planet_body-pink.svg','../pfpimg/03planetbody/planet_body-red.svg','../pfpimg/03planetbody/planet_body-sky.svg'],
-//     ['../pfpimg/04planetpattern/planet_pattern-circles.svg','../pfpimg/04planetpattern/planet_pattern-crater.svg','../pfpimg/04planetpattern/planet_pattern-pockmark.svg','../pfpimg/04planetpattern/planet_pattern-stain.svg','../pfpimg/04planetpattern/planet_pattern-stripe.svg'],
-//     ['../pfpimg/05planetshade/planet_shade-default.svg'],
-//     ['../pfpimg/06eyes/eyes-cynic.svg','../pfpimg/06eyes/eyes-default.svg','../pfpimg/06eyes/eyes-evil.svg','../pfpimg/06eyes/eyes-frustrated.svg','../pfpimg/06eyes/eyes-love.svg','../pfpimg/06eyes/eyes-smile.svg'],
-//     ['../pfpimg/07mouth/mouth-bad.svg','../pfpimg/07mouth/mouth-good.svg','../pfpimg/07mouth/mouth-normal.svg','../pfpimg/07mouth/mouth-oval.svg','../pfpimg/07mouth/mouth-very_bad.svg','../pfpimg/07mouth/mouth-very_good.svg'],
-//     ['../pfpimg/08mask/mask-default.svg'],
-//     ['../pfpimg/09satellite/satellite-basic_white.svg'],
-//     ['../pfpimg/10ring/ring-basic.svg']
-// ];
+
 import backgroundPFP from '../pfpimg/01background/background-default.svg';
 import backlightPFP from '../pfpimg/02backlight/backlight-1.svg';import backlightPFP2 from '../pfpimg/02backlight/backlight-2.svg';import backlightPFP3 from '../pfpimg/02backlight/backlight-3.svg';
 import planetbodyPFP from '../pfpimg/03planetbody/planet_body-green.svg';import planetbodyPFP2 from '../pfpimg/03planetbody/planet_body-orange.svg';import planetbodyPFP3 from '../pfpimg/03planetbody/planet_body-pink.svg';import planetbodyPFP4 from '../pfpimg/03planetbody/planet_body-red.svg';import planetbodyPFP5 from '../pfpimg/03planetbody/planet_body-sky.svg';
@@ -21,6 +10,7 @@ import mouthPFP from '../pfpimg/07mouth/mouth-bad.svg';import mouthPFP2 from '..
 import maskPFP from '../pfpimg/08mask/mask-default.svg';
 import satellitePFP from '../pfpimg/09satellite/satellite-basic_white.svg';
 import ringPFP from '../pfpimg/10ring/ring-basic.svg';
+
 function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
@@ -414,6 +404,20 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
     console.log("pfp3:"+pfp3);
     console.log("pfp4:"+pfp4);
     console.log("pfp5:"+pfp5);
+    const [toggle, setToggle] = useState('none');
+   
+    // useEffect(()=>{
+    //     if(document.getElementById('popOver')){
+    //         if(toggle=='none'){
+    //             document.getElementById('popOver').style.display="none";
+    //         }
+    //         else{
+    //             document.getElementById('popOver').style.display="flex";
+    //         }
+    //     }
+        
+    // },[toggle])
+    
     return(
         
         <div className="EmotionsBox">
@@ -422,29 +426,73 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
             <canvas id="canvas3" ref={canvas3} width={360}height={360}/>
             <canvas id="canvas4" ref={canvas4} width={360}height={360}/>
             <canvas id="canvas5" ref={canvas5} width={360}height={360}/>
-                
+            <div className="emotionsIntro">
+                <h2 className="body150">나른 스페이스 행성계의 행성들은 감정이 풍부하고,<br/>공감 능력이 뛰어난 친구들입니다.</h2>    
+                <h2 className="body150">모두가 멀리 떨어져있지만,<br/>같은 행성계에서 살아간다는 공통점이 있죠. </h2> 
+                <h2 className="body150"> 그 공통점 때문인지, 사람들의 감정에 공감하면서<br/>다양한 형태로 모습이 바뀌게 됩니다.</h2> 
+            </div>    
             
             <div className="Emotions">
-                <div className="happy_emotions">
-                    <img className="pfpImage" src={pfp1}> 
-                    </img>
+                {/* <div tabindex="0" id='popOver' onBlur={()=>{setToggle('none');console.log("blur success");}}className="popover">
+                    <div><h1 className="point100">{toggle}</h1></div>
+                    {toggle=='기쁨'?<img src={pfp1}/>:<></>}
+                    {toggle=='분노'?<img src={pfp2}/>:<></>}
+                    {toggle=='슬픔'?<img src={pfp3}/>:<></>}
+                    {toggle=='사랑'?<img src={pfp4}/>:<></>}
+                    {toggle=='걱정'?<img src={pfp5}/>:<></>}
+                    <div><h3 className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같아요.<br/>축제를 열 생각인지 ‘기쁨' 행성이 훌라후프를 돌고 있네요.</h3></div>
+                </div> */}
+                <div onClick={()=>{setToggle('기쁨');}}className="happy_emotions">
+                    <img className="pfpImage" src={pfp1}/> 
+                    <div className="happy_emotions_txtBox">
+                        {/* <h3 className="subhead100">기쁨</h3> */}
+                        <div className="subhead100">기쁨</div>
+                        <div className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같아요. 축제를 열 생각인지 ‘기쁨' 행성이 훌라후프를 돌고 있네요.</div>
+                        {/* <h3 className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같<br/>아요. 축제를 열 생각인지 ‘기쁨' 행성이 훌라후<br/>프를 돌고 있네요.</h3> */}
+                    </div>
+                    
                 </div>
-                <div className="happy_emotions">
-                    <img className="pfpImage" src={pfp2}> 
-                    </img>
+                <div onClick={()=>{setToggle('분노');}}className="happy_emotions">
+                    <img className="pfpImage" src={pfp2}/> 
+                    <div className="happy_emotions_txtBox">
+                        {/* <h3 className="subhead100">기쁨</h3> */}
+                        <div className="subhead100">분노</div>
+                        <div className="body150">모든 스트레스는 인간관계때문에 나온다고 해요. 그래서 그런지 ‘분노' 행성의 위성이 갑자기 늘어난 것 같아요.</div>
+                        {/* <h3 className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같<br/>아요. 축제를 열 생각인지 ‘기쁨' 행성이 훌라후<br/>프를 돌고 있네요.</h3> */}
+                    </div>
+                    
                 </div>
-                <div className="happy_emotions">
-                    <img className="pfpImage" src={pfp3}> 
-                    </img>
+                <div onClick={()=>{setToggle('슬픔');}}className="happy_emotions">
+                    <img className="pfpImage" src={pfp3}/> 
+                    <div className="happy_emotions_txtBox">
+                        {/* <h3 className="subhead100">기쁨</h3> */}
+                        <div className="subhead100">슬픔</div>
+                        <div className="body150">사람들이 많이 우울한 것 같아요. 그래서 그런지 ‘슬픔' 행성의 표정이 점점 어두워졌답니다.</div>
+                        {/* <h3 className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같<br/>아요. 축제를 열 생각인지 ‘기쁨' 행성이 훌라후<br/>프를 돌고 있네요.</h3> */}
+                    </div>
+                    
                 </div>
-                <div className="happy_emotions">
-                    <img className="pfpImage" src={pfp4}> 
-                    </img>
+                <div onClick={()=>{setToggle('사랑');}}className="happy_emotions">
+                    <img className="pfpImage" src={pfp4}/> 
+                    <div className="happy_emotions_txtBox">
+                        {/* <h3 className="subhead100">기쁨</h3> */}
+                        <div className="subhead100">사랑</div>
+                        <div className="body150">최근 사람들의 사랑이 점점 깊어지는 것 같아요. 그래서인지 ‘사랑' 행성은 부끄러웠는지 얼굴에 반점들이 많이 생겼어요.</div>
+                        {/* <h3 className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같<br/>아요. 축제를 열 생각인지 ‘기쁨' 행성이 훌라후<br/>프를 돌고 있네요.</h3> */}
+                    </div>
+                    
                 </div>
-                <div className="happy_emotions">
-                    <img className="pfpImage" src={pfp5}> 
-                    </img>
+                <div onClick={()=>{setToggle('걱정');}}className="happy_emotions">
+                    <img className="pfpImage" src={pfp5}/> 
+                    <div className="happy_emotions_txtBox">
+                        {/* <h3 className="subhead100">기쁨</h3> */}
+                        <div className="subhead100">걱정</div>
+                        <div className="body150">‘걱정' 행성의 색이 더욱 짙어진 걸 보니 사람들이 품고 있는 근심 걱정들이 많아진 것 같아요.</div>
+                        {/* <h3 className="body150">기뻐하는 사람들이 많은 건 정말 큰 축복인 것 같<br/>아요. 축제를 열 생각인지 ‘기쁨' 행성이 훌라후<br/>프를 돌고 있네요.</h3> */}
+                    </div>
+                    
                 </div>
+                
             </div>
         </div>
     )

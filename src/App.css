@@ -21,6 +21,10 @@ h5{
   font-family: 'Spoqa Han Sans Neo', 'sans-serif'; 
   letter-spacing: -0.01em;
 }
+button{
+  border:none;
+  outline: none;
+}
 
 h1.title150{font-size: 32px;line-height: 150%;} h2.title150{font-size: 24px; line-height: 150%;} h3.title150{font-size: 18px; line-height: 150%;} 
 h1.point150{font-size: 24px;line-height: 150%;} h2.point150{font-size: 18px; line-height: 150%;} h3.point150{font-size: 16px; line-height: 150%;} h4.point150{font-size: 14px;line-height: 150%;} h5.point150{font-size: 12px;line-height: 150%;}
@@ -414,12 +418,26 @@ textarea:focus{
   flex-direction: column;
   align-items: center;
   background-color: #161C2D;
-  margin-top:100px;
+  margin-top:80px;
+}
+.emotionsIntro{
+  color:white;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height:200px;
+  text-align: center;
+  margin-bottom: 20px;
+  /* border:1px solid; */
+}
+.emotionsIntro > .body150{
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
 }
 .Emotions{
   display:flex;
   flex-direction: column;
-  height:100vh;
   justify-content: space-between;
   
 }
@@ -436,6 +454,43 @@ textarea:focus{
   width: 342px;
   height: 100px;
   align-items: center;
+  margin-bottom:12px;
+}
+.happy_emotions:nth-child(5){
+  margin-bottom: 150px;
+}
+.happy_emotions_txtBox{
+  margin:0;
+  padding:0;
+  display:flex;
+  margin-left: 12px;
+  flex-direction: column;
+  width:230px;
+  height:74px;
+  justify-content: center;
+  color:white;
+}
+.happy_emotions_txtBox > .subhead100{
+  font-family: Spoqa Han Sans Neo;
+font-style: normal;
+font-weight: bold;
+font-size: 12px;
+line-height: 100%;
+/* identical to box height, or 12px */
+letter-spacing: -0.01em;
+margin-bottom:8px;
+}
+.happy_emotions_txtBox > .body150{
+  font-family: Spoqa Han Sans Neo;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 150%;
+/* or 18px */
+letter-spacing: -0.01em;
+}
+#popOver{
+  border:1px solid;
 }
 #canvas{
   display:none;
@@ -775,6 +830,7 @@ textarea:focus{
   margin-left:24px;
   margin-right:24px;
   padding-left: 16px;
+  margin-bottom: 8px;
 }
 input:focus {outline:none; color:white;}
 .loginID::placeholder{
@@ -792,6 +848,7 @@ input:focus {outline:none; color:white;}
   margin-right:24px;
   color:#A6A6AF;
   padding-left: 16px;
+  margin-bottom: 8px;
 }
 .loginPW::placeholder{
   /* padding-left: 16px; */
@@ -810,6 +867,7 @@ input:focus {outline:none; color:white;}
   color:white;
   font-weight: 700;
   font-size: 14px;
+  margin-bottom: 8px;
 }
 .loginFindandSignup{
   display:flex;
@@ -825,6 +883,8 @@ input:focus {outline:none; color:white;}
   font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
   font-weight: 400;
   font-size: 12px;
+  background-color: #1F2537;
+  color:white;
 }
 
 .loginBoxVector{
