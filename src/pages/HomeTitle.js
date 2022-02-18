@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 import {storage} from '../firebase-config';
 import {ref} from '@firebase/storage';
 import { getDownloadURL} from "firebase/storage";
-import pfp from '../img/user_avatar-default.svg';
+import pfp from '../img/avatar.svg';
+import image from '../img/Group 1.svg';
 import messenger from '../img/Union.svg';
 import heart from '../img/heart.svg';
 import hearted from '../img/hearted.svg';
@@ -46,8 +47,8 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
     const postDoc = doc(db, posts, id);
     const docSnap = await getDoc(postDoc);
     let commentCount = docSnap.data().commentCount;
-    if(commentCount>=7){
-      alert("한 게시물에 댓글은 7개까지만 다실 수 있습니다.");
+    if(commentCount>=16){
+      alert("한 게시물에 댓글은 15개까지만 다실 수 있습니다.");
       return 0;
     }
     commentCount =  commentCount +1;
@@ -126,7 +127,7 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
     // console.log(comment);
     
     if(e.key=='Enter'){
-      // var input = document.getElementById("commentAddInput"+id);input.value='';
+      var input = document.getElementById("commentAddInput"+id);input.value='';
       await addComment(id);
     }
 
@@ -138,6 +139,10 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
   }
   return (
     <div className="homePage">
+      <div className="firstPost">
+        <img className="firstPostImage" src={pfp}/>
+        <Link to='/createpost'className="firstPostButton"><h1 className="caption151">회원님의 이야기를 전달해주세요.</h1></Link>
+      </div>
       {postLists.map((post) => {
         return (
           <div className="post">
@@ -157,7 +162,8 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
                 )}
               </div> */}
             </div>
-            
+            {/* 더보기 만들거면 밑에거 조정해야함 */}
+            <div className="postTitle"><h1 className="point150">{post.title}</h1></div>
             <div className="postTextContainer"> {post.postText} </div>
             <div className="likeAndComment">
               <button className="likeButton" id={post.id} onClick={()=>{if(post.author.id===auth.currentUser.uid){alert("본인 게사물에는 좋아요를 누를 수 없습니다")} else{addLike(post.id);}  }}>{!post.like.includes(user.displayName)?<img src={heart}/>:<img src={hearted}/>}{post.likeCount>=2?<h2 id="wholikeTxt"className="caption100">{post.like[0]}님 외 여러 명이 좋아합니다.</h2>:(post.likeCount==1?<h2 id="wholikeTxt"className="caption100">{post.like[0]}님 외 여러 명이 좋아했으면 좋겠습니다.</h2>:<h2 id="wholikeTxt"className="caption100">여러 명이 좋아했으면 좋겠습니다.</h2>)}</button>
@@ -183,7 +189,7 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
               (<div className="commentShowBox">{post.comment.map((com,index)=>{return <div id="commentShow">
                 <hr className="breakLine"/>
                 <div className="commentAndPeople">
-                  <p className="caption150">{post.commentPeople[index]}</p> <p className="postMainComment">{com}</p>
+                  <p className="caption150">{post.commentPeople[index]}</p> <div className="postMainComment">{com}</div>
                 </div>
             </div>})}</div>)
             }

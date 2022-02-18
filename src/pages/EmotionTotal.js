@@ -13,10 +13,11 @@ import pfp5 from "../img/pfp-worry.svg";
 function EmotionTotal({user,setOpen,setCurrentPage,setIsAuth, isAuth}){
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
+    console.log("isAuth:"+isAuth);
     var navigate = useNavigate();
-    console.log(isAuth);
+    // console.log(isAuth);
     setCurrentPage("감정일기");
-    if(isAuth==false){
+    if(!isAuth==true){
         navigate("/login");
     }
     // useEffect(())

@@ -12,9 +12,17 @@ import satellitePFP from '../pfpimg/09satellite/satellite-basic_white.svg';
 import ringPFP from '../pfpimg/10ring/ring-basic.svg';
 
 function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
+    const [numbers,setNumbers] = useState(0);
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
    setCurrentPage("나른 PFP");
+   fetch('https://disease.sh/v3/covid-19/countries/Republic of Korea').then((response)=>{
+       return response.json();
+   })
+   .then((data)=>{
+       console.log(data.todayCases);
+    //    setNumbers(data.todayCases);
+   })
 //    console.log(isAuth);
     const [image, setImage] = useState(null);
     const [image1, setImage1] = useState(null);
@@ -399,11 +407,11 @@ function Emotions({setOpen,setCurrentPage,setIsAuth,isAuth}){
           setPfp5(myCanvas.toDataURL());
         }
     },[image40,image41,image42,image43,image44,image45,image46,image47,image48,image49,canvas5])
-    console.log("pfp1:"+pfp1);
-    console.log("pfp2:"+pfp2);
-    console.log("pfp3:"+pfp3);
-    console.log("pfp4:"+pfp4);
-    console.log("pfp5:"+pfp5);
+    // console.log("pfp1:"+pfp1);
+    // console.log("pfp2:"+pfp2);
+    // console.log("pfp3:"+pfp3);
+    // console.log("pfp4:"+pfp4);
+    // console.log("pfp5:"+pfp5);
     const [toggle, setToggle] = useState('none');
    
     // useEffect(()=>{
