@@ -19,6 +19,9 @@ function Emotion5({user,setOpen,setIsAuth, isAuth}){
     if(!isAuth){
         navigate("/login");
     }
+    useEffect(()=>{
+        document.querySelector('.headerTab').scrollTo({left:60, behavior:'auto'});
+    },[])
     
     return(
         <div className="Emotion1">

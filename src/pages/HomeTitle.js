@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { getDoc, updateDoc,arrayUnion, onSnapshot, setDoc,collection, deleteDoc, doc, arrayRemove, QuerySnapshot ,query} from "firebase/firestore";
 import { auth, db } from "../firebase-config";
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import {storage} from '../firebase-config';
 import {ref} from '@firebase/storage';
 import { getDownloadURL} from "firebase/storage";
@@ -20,6 +20,10 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
   const [whichPostUserLike,setWhichPostUserLike] = useState([]);
   const [currentUser,setCurrentUser] = useState({});
   const postsCollectionRef = collection(db, posts);
+  var navigate = useNavigate();
+  if(isAuth==false){
+    navigate("/login");
+  }
   onAuthStateChanged(auth,(User)=>{
     setCurrentUser(User);
   })
@@ -36,7 +40,6 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
       
     );
     // console.log(postLists);
-    
   },false)
   const deletePost = async (id) => {
     const postDoc = doc(db, posts, id);
@@ -52,14 +55,13 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
       return 0;
     }
     commentCount =  commentCount +1;
-    // console.log("userdisplayName:"+user.displayName);
     var emotionNum = 0;
-    // console.log(comment); updateDoc함수가 조금 불안정함.
     if(posts=='posts'){
       emotionNum = docSnap.data().emotion;
       var comments = docSnap.data().comment;
       comments.push(comment);
       var commentPeoples = docSnap.data().commentPeople;
+      console.log("user.displayName:"+user.displayName);
       commentPeoples.push(user.displayName);
       await setDoc(doc(db,'posts',id),{...docSnap.data(),comment:comments,commentPeople:commentPeoples,commentCount:commentCount});
       await setDoc(doc(db,'post'+emotionNum,id),{...docSnap.data(),comment:comments,commentPeople:commentPeoples,commentCount:commentCount});
@@ -171,12 +173,13 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
             </div>
             
             {(post.commentCount<=1)?
-               <>
+              (post.commentCount==0?(<></>):
+               (<>
                 <hr className="breakLine"/>
                 <div className="commentAndPeople">
                   <h1 className="caption150">{post.commentPeople?post.commentPeople[0]:""}</h1> <p className="postMainComment">{post.comment?post.comment[0]:""}</p>
                 </div>
-               </>
+               </>))
               :commentToggle!=post.id?(
               <div id="commentShow">
                 <hr className="breakLine"/>
@@ -186,8 +189,7 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
                 <button onClick={()=>{commentToggles(post.id)}} className="commentMoreButton" id="commentMoreTxt"><h3 className="subhead100">댓글더보기 &gt;</h3></button>
               </div>)
               :
-              (<div className="commentShowBox">{post.comment.map((com,index)=>{return <div id="commentShow">
-                <hr className="breakLine"/>
+              (<div className="commentShowBox"><hr className="breakLine"/>{post.comment.map((com,index)=>{return <div id="commentShow">
                 <div className="commentAndPeople">
                   <p className="caption150">{post.commentPeople[index]}</p> <div className="postMainComment">{com}</div>
                 </div>
@@ -199,7 +201,7 @@ function HomeTitle({ user,setIsAuth,isAuth,posts }) {
               <input  onBlur={(e)=>{var input1 = document.getElementById('commentAddInput'+post.id);input1.value='';}} onFocus={(e)=>{var input = document.getElementById(post.id+'button');input.style.display="block";var input1 = document.getElementById('commentAddInput'+post.id);input1.value='';input1.style.borderTopRightRadius= "0px";input1.style.borderBottomRightRadius="0px";}} id={"commentAddInput"+post.id}onKeyPress={(e)=>{inputPress(e,post.id)}} className="postCommentInput" placeholder="회원님의 생각을 전달해주세요." onChange={(event)=>{setComment(event.target.value);}}/>
               <button id={post.id+'button'} style={commentButtonStyle} className="commentSendButton" onClick={()=>{addComment(post.id)}}><h3 className="subhead100">등록</h3></button> 
             </div>
-            </div>
+          </div>
           
         );
       })}

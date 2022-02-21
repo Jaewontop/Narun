@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import CreatePost from './pages/CreatePost'; 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {auth} from './firebase-config';
 import {signOut,setPersistence,browserSessionPersistence,onAuthStateChanged} from 'firebase/auth';
 
@@ -21,6 +21,9 @@ import Emotions from './pages/Emotions';
 import Signup from './pages/Signup';
 import EmotionTotal from './pages/EmotionTotal';
 import Mypage from './pages/Mypage';
+import Notmobile from './pages/Notmobile';
+// import {useNavigate} from 'react-router-dom';
+import {BrowserView, Mobileview, isBrowser,isMobile} from 'react-device-detect';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -30,13 +33,15 @@ function App() {
     signOut(auth).then(()=>{
         localStorage.clear();
         setIsAuth(false);
-        window.location.pathname = "/";
+        window.location.href='/emotiontotal';
     });
   }
+
+  
   function toggleButton(){
       let toggles = document.getElementById('toggleBar');
       if(!isOpen){
-          toggles.style.top="80px";  
+          toggles.style.top="56px";  
 
       }
       else{
@@ -59,27 +64,29 @@ function App() {
   })
   return (
     <Router>
-      <nav>
+      <nav >
+        {/* <BrowserView>해당기기는 지원하지 않습니다. </BrowserView> */}
+        {/* onBlur={()=>{toggleButton(); console.log("onblurred");setOpen(false);}}  */}
+        <div id="toggleBar">
+          <Link className="toggleBarLink" to='/home'>나른 소개</Link>
+          <Link className="toggleBarLink" to='/emotiontotal'>감정일기</Link>
+          <Link className="toggleBarLink" to='/emotions'>나른 PFP</Link>
+          <Link className="toggleBarLink" to='/mypage'>마이페이지</Link>
+          {isAuth ? ( <Link className="toggleBarLink" to='/'onClick={signUserOut}>로그아웃</Link>)
+          :<Link className="toggleBarLink" to='/login'>로그인</Link>}
+        </div>
         <div className="home_nav">
-            <button className="hamburgerButton" onClick={()=>{toggleButton()}}><Hamburger duration={0.7} size={24} toggled={isOpen} toggle={setOpen} /></button>
-            <div id="toggleBar">
-                <Link className="toggleBarLink" to='/home'>나른 소개</Link>
-                <Link className="toggleBarLink" to='/emotiontotal'>감정일기</Link>
-                <Link className="toggleBarLink" to='/emotions'>나른 PFP</Link>
-                <Link className="toggleBarLink" to='/mypage'>마이페이지</Link>
-                {isAuth ? ( <Link className="toggleBarLink" to='/'onClick={signUserOut}>logOut</Link>)
-                :<Link className="toggleBarLink" to='/login'>로그인</Link>}
-            </div>
+            <button className="hamburgerButton" onClick={()=>{toggleButton()}}><Hamburger duration={0.5} size={24} toggled={isOpen} toggle={setOpen} /></button>
             <Link to='/'><div className="service_title">{currentPage}</div></Link>
             <Link className="writePostButton" to='/createpost'><img className="writePost"src={image}></img></Link>
         </div>
       </nav>
       <Routes>
-        <Route path='mypage' element={<Mypage setOpen={setOpen} setCurrentPage={setCurrentPage}/>}></Route>
+        <Route path='mypage' element={<Mypage user={user}setOpen={setOpen} setCurrentPage={setCurrentPage}/>}></Route>
         <Route path="/" element={<Home setOpen={setOpen} setCurrentPage={setCurrentPage}/>}></Route>
         <Route path='/home' element={<Home setOpen={setOpen} setCurrentPage={setCurrentPage}/>}></Route>
         <Route path='/emotions' element={<Emotions setOpen={setOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth} isAuth={isAuth}/>}></Route>
-        <Route path="/login" element={<Login setOpen={setOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth} isAuth={isAuth}/>}></Route>
+        <Route path="/login" element={<Login toggleButton={toggleButton}setOpen={setOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth} isAuth={isAuth}/>}></Route>
         <Route path="/signup" element={<Signup setOpen={setOpen} setCurrentPage={setCurrentPage} setIsAuth={setIsAuth}/>}></Route>
         <Route path="/createpost" element={<CreatePost user={user}setOpen={setOpen} isAuth ={isAuth}/>}></Route>
         <Route path="/profile" element={<Profile setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
@@ -89,6 +96,7 @@ function App() {
         <Route path='/emotion3' element={<Emotion3 user={user}setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion4' element={<Emotion4 user={user}setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
         <Route path='/emotion5' element={<Emotion5 user={user}setOpen={setOpen} setIsAuth={setIsAuth} isAuth ={isAuth}/>}></Route>
+        <Route path='/notmobile' element={<Notmobile/>}></Route>
       </Routes>
     </Router>
   );

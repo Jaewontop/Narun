@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
-import img from '../img/_illust-1.svg';
-const Mypage = ({setOpen,setCurrentPage}) => {
+import img from '../img/_illust-1-2.svg';
+
+const Mypage = ({user,setOpen,setCurrentPage}) => {
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
     setCurrentPage('마이페이지');
@@ -12,7 +13,8 @@ const Mypage = ({setOpen,setCurrentPage}) => {
                     
                 </div>
             </div> */}
-            <h1 className="point150">나른스페이스의 행성들이 열심히 준비중입니다. 조금만 기다려주세요!</h1>
+
+            <h1 className="point150"> 이 페이지는 나른스페이스의 행성들이 열심히 준비중입니다. 조금만 기다려주세요!</h1>
             <img src={img}></img>
         </div>
     );

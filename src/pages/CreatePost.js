@@ -24,14 +24,19 @@ function CreatePost({user,setOpen, setCurrentPage,isAuth,posts}){
     console.log(postName);
     const postsCollectionRef = collection(db, postName);
     const createPost = async () => {
+        if(title.length>20){
+            alert("글자수를 줄여보는건 어떨까요?");
+            return 0;
+        }
+        
         const docnumdoc = doc(db, 'docnum','IYhbCxzVItcNB9GNBaRm');
         const docSnap = await getDoc(docnumdoc);
         var docnum = docSnap.data().docnum;
         docnum = docnum +1 ;
         await updateDoc(docnumdoc,{docnum:docnum});
         docnum = String(docnum);
-        await setDoc(doc(db,postName,docnum), {title,postText,emotion:emotionSelect,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
-        await setDoc(doc(db,'posts',docnum),{title,postText,emotion:emotionSelect,comment:[],commentCount:0,author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
+        await setDoc(doc(db,postName,docnum), {title:title,postText:postText,emotion:emotionSelect,comment:[],commentCount:0,commentPeople:[],author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
+        await setDoc(doc(db,'posts',docnum),{title:title,postText:postText,emotion:emotionSelect,comment:[],commentCount:0,commentPeople:[],author:{name:user.displayName,id:user.uid},likeCount:0,like:[]});
         navigate('/emotiontotal');
     }
     useEffect(()=>{

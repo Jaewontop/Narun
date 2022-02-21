@@ -12,6 +12,7 @@ const SignUp = ({setOpen, setCurrentPage,setIsAuth}) => {
     const [registerPassword, setRegisterPassword] = useState("");
     const [registerCheckPassword, setRegisterCheckPassword] = useState("");
     const [registerCheckBool, setRegisterCheckBool] = useState(false);
+    const [registerCheckPasswordNone,setRegisterCheckPasswordNone] = useState(true);
     const [registerNickname,setRegisterNickname] = useState("");
     const [nicknameCheckBool,setNicknameCheckBool] = useState(true);
     const [emailCheckBool,setEmailCheckBool] = useState(true);
@@ -22,6 +23,7 @@ const SignUp = ({setOpen, setCurrentPage,setIsAuth}) => {
             setIsAuth(true);
             navigate("/emotiontotal");
         })
+       
     }
 
     const register = async () => {
@@ -76,6 +78,12 @@ const SignUp = ({setOpen, setCurrentPage,setIsAuth}) => {
     //     }
     // },[registerNickname])
     useEffect(()=>{
+        if(registerCheckPassword.length==0){
+            setRegisterCheckPasswordNone(true);
+        }
+        else{
+            setRegisterCheckPasswordNone(false);
+        }
         if(registerCheckPassword===registerPassword){
             setRegisterCheckBool(true);
         }
@@ -93,12 +101,12 @@ const SignUp = ({setOpen, setCurrentPage,setIsAuth}) => {
             <div className="loginButtons">
                 <input className="loginPW" type="password"placeholder="비밀번호" onChange={(event) => {setRegisterPassword(event.target.value);}}></input>
                 <input className="loginPW" type="password"placeholder="비밀번호 확인" onChange={(event) => {setRegisterCheckPassword(event.target.value);}}></input>
-                {registerCheckBool?(<div className="registerPasswordTrue">두 비밀번호가 일치합니다!</div>):(<div className="registerPasswordFalse">두 비밀번호가 일치하지 않습니다!</div>)}
+                {registerCheckPasswordNone?(<></>) :(registerCheckBool?(<div className="registerPasswordTrue">두 비밀번호가 일치합니다!</div>):(<div className="registerPasswordFalse">두 비밀번호가 일치하지 않습니다!</div>))}
             </div>
             
             <div className="loginButtons">
                 <input className="loginID" placeholder="닉네임" onChange={(event) => {setRegisterNickname(event.target.value);}}></input>
-                {nicknameCheckBool?(<></>):(<div className="registerPasswordFalse">사용할 수 없는 닉네임입니다.</div>)}
+                {(nicknameCheckBool?(<></>):(<div className="registerPasswordFalse">사용할 수 없는 닉네임입니다.</div>))}
             </div>
             
             <button onClick={()=>{register()}}className="loginButton">회원가입 완료하기</button>

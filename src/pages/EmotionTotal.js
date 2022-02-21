@@ -14,11 +14,11 @@ function EmotionTotal({user,setOpen,setCurrentPage,setIsAuth, isAuth}){
     useEffect(()=>{setOpen(false);let toggles = document.getElementById('toggleBar');toggles.style.top="-300px";
      },false);
     console.log("isAuth:"+isAuth);
-    var navigate = useNavigate();
+    // var navigate = useNavigate();
     // console.log(isAuth);
     setCurrentPage("감정일기");
     if(!isAuth==true){
-        navigate("/login");
+        window.location.href='/login';
     }
     // useEffect(())
     
