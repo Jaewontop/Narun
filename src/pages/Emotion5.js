@@ -20,7 +20,7 @@ function Emotion5({user,setOpen,setIsAuth, isAuth}){
         navigate("/login");
     }
     useEffect(()=>{
-        document.querySelector('.headerTab').scrollTo({left:60, behavior:'auto'});
+        document.querySelector('.headerTab').scrollTo({left:100, behavior:'auto'});
     },[])
     
     return(

@@ -957,7 +957,8 @@ input:focus {outline:none; color:white;}
   width:calc(100% - 48px);
   margin-left:24px;
   margin-right:24px;
-  height:56px;
+  min-height:56px;
+
   border-radius: 12px;
   border:none;
   background-color: #275EFB;
